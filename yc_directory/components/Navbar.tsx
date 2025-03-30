@@ -1,4 +1,5 @@
 import { auth, signOut, signIn } from "@/auth";
+import { BadgePlus, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,15 +22,20 @@ const Navbar = async () => {
           {section && section?.user ? (
             <>
               <Link href="/startup/create">
-                <span>Create</span>
+                <span className="max-sm:hidden">Create</span>
+                <BadgePlus className="size-6 sm:hidden text-red-500" />
               </Link>
               <form
                 action={async () => {
                   "use server";
                   await signOut();
                 }}
+                className="flex items-center gap-2"
               >
-                <button type="submit">Logout</button>
+                <button type="submit">
+                  <span className="max-sm:hidden">Logout</span>
+                  <LogOut className="size-6 sm:hidden text-red-500" />
+                </button>
               </form>
 
               <Link href={`/users/${section?.id}`}>
